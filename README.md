@@ -80,24 +80,93 @@ scaffoldsmart-documentation-hub/
 
 ### Prerequisites
 
-- Node.js 18+ 
-- npm or yarn
+- **Node.js 18+** (Download from [nodejs.org](https://nodejs.org/))
+- **npm** (comes with Node.js) or **yarn**
+- **Git** (for cloning the repository)
 
-### Installation
+### Installation & Setup
 
 ```bash
-# Clone the repository
+# 1. Clone the repository
 git clone https://github.com/scaffoldsmart/documentation-hub.git
 cd documentation-hub
 
-# Install dependencies
+# 2. Install dependencies
 npm install
 
-# Start development server
+# 3. Start development server
 npm run dev
 
-# Build for production
+# 4. Open your browser
+# Visit: http://localhost:5173
+```
+
+### Build for Production
+
+```bash
+# Build optimized version
 npm run build
+
+# Preview production build locally
+npm run preview
+```
+
+## 📖 How to Use This Demo
+
+### Step 1: Explore the Documentation Hub
+
+1. **Start the development server**: `npm run dev`
+2. **Open your browser** to `http://localhost:5173`
+3. **Navigate through the sections**:
+   - **Home**: Overview of Kiro's three pillars
+   - **Live Demo**: Watch documentation update in real-time
+   - **Docs**: Comprehensive documentation hub
+   - **Showcase**: Success stories and use cases
+   - **API**: Interactive API documentation
+
+### Step 2: Experience Live Documentation
+
+1. **Click "Watch Live Demo"** on the homepage
+2. **See the interactive code editor** simulate real development
+3. **Watch documentation update automatically** as code changes
+4. **Try the search functionality** to find specific information
+5. **Toggle between light/dark themes** using the theme switcher
+
+### Step 3: Explore Kiro's Three Pillars
+
+#### 📋 **Specs** - Define What You Need
+- **Location**: `.kiro/specs/documentation-system.json`
+- **Purpose**: Defines documentation structure and generation rules
+- **Example**: Component documentation, API docs, tutorials
+
+#### 🔄 **Hooks** - Automate Everything  
+- **Location**: `.kiro/hooks/doc-maintenance.json`
+- **Purpose**: Automatically updates docs when code changes
+- **Triggers**: File saves, API changes, dependency updates
+
+#### 🎨 **Steering** - Maintain Quality
+- **Location**: `.kiro/steering/documentation-standards.md`
+- **Purpose**: Ensures consistent voice, style, and quality
+- **Features**: Writing guidelines, accessibility standards, quality gates
+
+### Step 4: Test Interactive Features
+
+1. **Search Bar**: Try searching for "API", "components", or "authentication"
+2. **Navigation**: Use the sidebar navigation in the Docs section
+3. **API Testing**: Click "Try it out" buttons in the API documentation
+4. **Responsive Design**: Resize your browser to see mobile/tablet layouts
+5. **Accessibility**: Try keyboard navigation (Tab, Enter, Arrow keys)
+
+### Step 5: Understand the Architecture
+
+```
+Key Files to Explore:
+├── src/pages/Docs.vue          # Main documentation hub
+├── src/components/LiveCodeDemo.vue  # Interactive demo component
+├── .kiro/specs/               # Documentation specifications
+├── .kiro/hooks/               # Automation configuration
+├── .kiro/steering/            # Quality guidelines
+└── docs/                      # Generated documentation examples
 ```
 
 ### Kiro Integration
@@ -194,6 +263,64 @@ npm run preview      # Preview production build
 npm run kiro:demo    # Run Kiro demonstration
 npm run kiro:validate # Validate documentation
 ```
+
+## 🔧 Troubleshooting
+
+### Common Issues & Solutions
+
+#### Port Already in Use
+```bash
+# If port 5173 is busy, Vite will automatically use the next available port
+# Check the terminal output for the actual URL
+```
+
+#### Dependencies Installation Issues
+```bash
+# Clear npm cache and reinstall
+npm cache clean --force
+rm -rf node_modules package-lock.json
+npm install
+```
+
+#### Build Errors
+```bash
+# Ensure you have the correct Node.js version
+node --version  # Should be 18+
+
+# Update npm to latest version
+npm install -g npm@latest
+```
+
+### Browser Compatibility
+- **Chrome/Edge**: Full support
+- **Firefox**: Full support  
+- **Safari**: Full support (macOS/iOS)
+- **Mobile**: Responsive design works on all devices
+
+### Performance Tips
+- Use **Chrome DevTools** to inspect the interactive demo
+- Enable **Vue DevTools** extension for better debugging
+- The app is optimized for **fast loading** and **smooth animations**
+
+## 🎯 What Makes This Special
+
+### For Developers
+- **Zero Configuration**: Works out of the box
+- **Live Reload**: Changes appear instantly
+- **Modern Stack**: Vue 3, Vite, Tailwind CSS
+- **Type Safety**: Full TypeScript support ready
+
+### For Teams
+- **Collaborative**: Multiple developers can contribute
+- **Scalable**: Grows with your project
+- **Maintainable**: Clean, documented codebase
+- **Extensible**: Easy to add new features
+
+### For Documentation
+- **Auto-Generated**: No manual writing required
+- **Always Current**: Updates with code changes
+- **Searchable**: Find anything instantly
+- **Accessible**: Works for everyone
 
 ### Key Technologies
 

@@ -128,14 +128,18 @@
 
               <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Quick Start</h3>
               <div class="bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-6">
-                <pre class="text-green-400 text-sm"><code># Install ScaffoldSmart CLI
-npm install -g @scaffoldsmart/cli
+                <pre class="text-green-400 text-sm"><code># Clone this demo repository
+git clone https://github.com/scaffoldsmart/documentation-hub
+cd documentation-hub
 
-# Initialize your documentation hub
-scaffoldsmart init
+# Install dependencies
+npm install
 
 # Start the development server
-scaffoldsmart dev</code></pre>
+npm run dev
+
+# Try Kiro documentation features
+npm run kiro:demo</code></pre>
               </div>
             </div>
           </section>
