@@ -25,7 +25,7 @@
     <!-- Main Content -->
     <div class="grid grid-cols-1 lg:grid-cols-2 h-96">
       <!-- Code Side -->
-      <div class="bg-gray-900 p-4 overflow-auto">
+      <div class="bg-gray-900 dark:bg-gray-800 p-4 overflow-auto">
         <div class="text-xs text-gray-400 mb-2 font-mono">
           {{ currentStep.filename }}
         </div>
@@ -36,12 +36,12 @@
       </div>
       <!-- Documentation Side -->
       <div
-        class="bg-white dark:bg-gray-800 p-4 overflow-auto border-l border-gray-200 dark:border-gray-700"
+        class="bg-white p-4 overflow-auto border-l border-gray-200 dark:border-gray-600"
       >
-        <div class="text-xs text-gray-500 dark:text-gray-400 mb-2">
+        <div class="text-xs text-gray-500 mb-2">
           Documentation
         </div>
-        <div class="prose prose-sm dark:prose-invert max-w-none">
+        <div class="prose prose-sm max-w-none">
           <h3 class="font-semibold mb-2">{{ currentStep.docTitle }}</h3>
           <p class="mb-2">{{ currentStep.documentation }}</p>
           <ul
