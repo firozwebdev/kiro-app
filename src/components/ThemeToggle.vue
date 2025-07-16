@@ -1,29 +1,69 @@
 <template>
-  <button @click="toggleTheme" :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
-    class="rounded-full p-2 bg-white/20 hover:bg-white/40 dark:bg-gray-800/40 dark:hover:bg-gray-700/60 shadow transition">
-    <span v-if="isDark" class="inline-block">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-8.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.95-7.07l-.71.71M6.34 6.34l-.71-.71" /></svg>
-    </span>
-    <span v-else class="inline-block">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-900 dark:text-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" /></svg>
-    </span>
+  <button
+    @click="toggleTheme"
+    class="relative p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 group"
+    :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+  >
+    <!-- Sun Icon (Light Mode) -->
+    <svg
+      v-if="!isDark"
+      class="w-5 h-5 text-yellow-500 transform transition-transform duration-300 group-hover:rotate-12"
+      fill="currentColor"
+      viewBox="0 0 20 20"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+        clip-rule="evenodd"
+      />
+    </svg>
+
+    <!-- Moon Icon (Dark Mode) -->
+    <svg
+      v-else
+      class="w-5 h-5 text-blue-400 transform transition-transform duration-300 group-hover:-rotate-12"
+      fill="currentColor"
+      viewBox="0 0 20 20"
+    >
+      <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+    </svg>
+
+    <!-- Animated background -->
+    <div
+      class="absolute inset-0 rounded-lg bg-gradient-to-r opacity-0 group-hover:opacity-20 transition-opacity duration-300"
+      :class="isDark ? 'from-blue-400 to-purple-500' : 'from-yellow-400 to-orange-500'"
+    ></div>
   </button>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-const isDark = ref(false);
+import { ref, onMounted } from 'vue'
 
-const setTheme = (dark) => {
-  isDark.value = dark;
-  document.documentElement.classList.toggle('dark', dark);
-  localStorage.setItem('theme', dark ? 'dark' : 'light');
-};
+const isDark = ref(false)
 
-const toggleTheme = () => setTheme(!isDark.value);
+const toggleTheme = () => {
+  isDark.value = !isDark.value
+  
+  if (isDark.value) {
+    document.documentElement.classList.add('dark')
+    localStorage.setItem('theme', 'dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+    localStorage.setItem('theme', 'light')
+  }
+}
 
 onMounted(() => {
-  const saved = localStorage.getItem('theme');
-  setTheme(saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches));
-});
-</script> 
+  // Check for saved theme preference or default to system preference
+  const savedTheme = localStorage.getItem('theme')
+  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  
+  if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+    isDark.value = true
+    document.documentElement.classList.add('dark')
+  } else {
+    isDark.value = false
+    document.documentElement.classList.remove('dark')
+  }
+})
+</script>
