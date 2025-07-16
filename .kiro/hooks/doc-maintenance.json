@@ -1,0 +1,124 @@
+{
+  "name": "documentation-keeper",
+  "description": "Intelligent documentation maintenance system that keeps docs in sync with code changes",
+  "version": "1.0.0",
+  "triggers": [
+    {
+      "name": "component-change-detector",
+      "event": "file-save",
+      "pattern": "src/**/*.{vue,ts,js}",
+      "action": "update-component-docs",
+      "debounce": 2000,
+      "priority": "high"
+    },
+    {
+      "name": "api-change-detector",
+      "event": "file-save",
+      "pattern": "api/**/*.{ts,js,yaml,json}",
+      "action": "regenerate-api-docs",
+      "debounce": 1000,
+      "priority": "high"
+    },
+    {
+      "name": "readme-sync",
+      "event": "file-save",
+      "pattern": "README.md",
+      "action": "sync-documentation-hub",
+      "debounce": 500,
+      "priority": "medium"
+    },
+    {
+      "name": "dependency-update-detector",
+      "event": "file-save",
+      "pattern": "package.json",
+      "action": "update-installation-guides",
+      "debounce": 3000,
+      "priority": "medium"
+    },
+    {
+      "name": "config-change-detector",
+      "event": "file-save",
+      "pattern": "*.config.{js,ts,json}",
+      "action": "update-configuration-docs",
+      "debounce": 2000,
+      "priority": "low"
+    }
+  ],
+  "actions": {
+    "update-component-docs": {
+      "description": "Extract component information and generate comprehensive documentation",
+      "steps": [
+        "extract-jsdoc-comments",
+        "analyze-props-and-events",
+        "generate-usage-examples",
+        "create-prop-tables",
+        "validate-prop-types",
+        "update-component-registry"
+      ],
+      "outputs": ["docs/components/", "examples/"],
+      "notifications": ["slack://dev-team", "email://docs-team"]
+    },
+    "regenerate-api-docs": {
+      "description": "Parse API endpoints and generate interactive documentation",
+      "steps": [
+        "parse-api-endpoints",
+        "extract-route-handlers",
+        "generate-openapi-spec",
+        "create-curl-examples",
+        "generate-response-schemas",
+        "update-postman-collection",
+        "validate-api-examples"
+      ],
+      "outputs": ["docs/api/", "postman/", "openapi.yaml"],
+      "notifications": ["slack://api-team"]
+    },
+    "sync-documentation-hub": {
+      "description": "Synchronize main README with documentation hub",
+      "steps": [
+        "parse-readme-sections",
+        "extract-getting-started",
+        "update-navigation-menu",
+        "sync-feature-descriptions",
+        "validate-internal-links"
+      ],
+      "outputs": ["src/data/navigation.json", "docs/overview.md"],
+      "notifications": ["slack://all-hands"]
+    },
+    "update-installation-guides": {
+      "description": "Update installation and setup documentation when dependencies change",
+      "steps": [
+        "analyze-dependency-changes",
+        "update-installation-steps",
+        "validate-setup-scripts",
+        "update-version-requirements",
+        "test-installation-process"
+      ],
+      "outputs": ["docs/installation.md", "scripts/setup.sh"],
+      "notifications": ["slack://dev-team"]
+    },
+    "update-configuration-docs": {
+      "description": "Document configuration changes and options",
+      "steps": [
+        "parse-config-files",
+        "extract-configuration-options",
+        "generate-config-documentation",
+        "create-example-configs",
+        "validate-config-schemas"
+      ],
+      "outputs": ["docs/configuration.md", "examples/configs/"],
+      "notifications": ["slack://dev-ops"]
+    }
+  },
+  "error_handling": {
+    "retry_attempts": 3,
+    "retry_delay": 5000,
+    "fallback_actions": ["log-error", "notify-maintainers"],
+    "error_notifications": ["slack://alerts", "email://maintainers"]
+  },
+  "performance": {
+    "max_concurrent_actions": 3,
+    "timeout_per_action": 30000,
+    "cache_results": true,
+    "cache_duration": 3600000
+  }
+}

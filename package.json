@@ -1,15 +1,24 @@
 {
-  "name": "vite-vue-tailwind-template",
+  "name": "scaffoldsmart-documentation-hub",
   "version": "1.0.0",
+  "description": "AI-Powered Knowledge Management for Development Teams - Kiro Contest Entry",
   "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "kiro:demo": "echo 'Running Kiro documentation sync demo...'",
+    "kiro:validate": "echo 'Validating documentation links and examples...'"
   },
   "dependencies": {
     "vue": "^3.4.0",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "@headlessui/vue": "^1.7.16",
+    "@heroicons/vue": "^2.0.18",
+    "fuse.js": "^7.0.0",
+    "highlight.js": "^11.9.0",
+    "marked": "^9.1.6",
+    "prismjs": "^1.29.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
@@ -17,5 +26,11 @@
     "postcss": "^8.0.0",
     "tailwindcss": "^3.0.0",
     "vite": "^4.0.0"
+  },
+  "keywords": ["kiro", "documentation", "ai", "productivity", "contest"],
+  "author": "ScaffoldSmart Team",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scaffoldsmart/documentation-hub"
   }
 }
